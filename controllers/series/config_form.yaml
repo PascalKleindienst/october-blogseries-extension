@@ -1,0 +1,27 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Series
+
+# Model Form Field configuration
+form: $/pkleindienst/blogseries/models/series/fields.yaml
+
+# Model Class name
+modelClass: PKleindienst\BlogSeries\Models\Series
+
+# Default redirect location
+defaultRedirect: pkleindienst/blogseries/series
+
+# Create page
+create:
+    title: Create Series
+    redirect: pkleindienst/blogseries/series/update/:id
+    redirectClose: pkleindienst/blogseries/series
+
+# Update page
+update:
+    title: Edit Series
+    redirect: pkleindienst/blogseries/series
+    redirectClose: pkleindienst/blogseries/series
