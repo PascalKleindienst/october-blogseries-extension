@@ -1,0 +1,22 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    title:
+        label: Title
+        searchable: true
+
+    post_count:
+       label: Posts
+       sortable: false
+
+    created_at:
+        label: Created At
+        type: date
+        invisible: true
+
+    updated_at:
+        label: Updated At
+        type: date
+        invisible: true

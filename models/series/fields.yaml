@@ -1,0 +1,23 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Title
+        span: left
+        required: true
+
+    slug:
+        label: Slug
+        span: right
+        placeholder: Slug
+        required: true
+        preset:
+            field: title
+            type: slug
+
+    description:
+        label: Description
+        type: richeditor
+        size: huge
