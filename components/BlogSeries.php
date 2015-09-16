@@ -136,7 +136,11 @@ class BlogSeries extends ComponentBase
     {
         // get serie
         $slug = $this->property('slug');
-        $series = Series::with('posts')->where('slug', $slug)->first();
+        $series = Series::with(['posts' => function ($q) {
+            $q->orderBy('published_at', 'ASC');
+        }])
+            ->where('slug', $slug)
+            ->first();
 
         // Add a "url" helper attribute for linking to each post and category
         if ($series && $series->posts->count()) {
