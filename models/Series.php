@@ -34,4 +34,18 @@ class Series extends Model
     {
         return $this->posts()->count();
     }
+
+    /**
+     * Sets the "url" attribute with a URL to this object
+     * @param string $pageName
+     * @param \Cms\Classes\Controller $controller
+     */
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'slug' => $this->slug,
+        ];
+
+        return $this->url = $controller->pageUrl($pageName, $params);
+    }
 }
