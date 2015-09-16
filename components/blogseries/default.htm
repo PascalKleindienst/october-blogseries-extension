@@ -1,30 +1,6 @@
 {% set series = __SELF__.series %}
 
-<h1>{{ series.title }}</h1>
+<h2>{{ series.title }} <small>({{ series.postCount }} Posts)</small></h2>
 <div class="lead">{{ series.description|raw }}</div>
-<h4>Posts in this Series: <small>{{ series.postCount }}</small></h4>
 
-<ul class="post-list">
-    {% for post in series.posts %}
-    <li>
-        <h3><a href="{{ post.url }}">{{ post.title|raw }}</a></h3>
-
-        <p class="info">
-            Posted
-            {% if post.categories.count %} in {% endif %}
-            {% for category in post.categories %}
-                <a href="{{ category.url }}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
-            {% endfor %}
-            on {{ post.published_at|date('M d, Y') }}
-        </p>
-
-        {% if post.excerpt %}
-            <p class="excerpt">{{ post.excerpt }}</p>
-        {% else %}
-            <div class="content">{{ post.content_html|raw }}</div>
-        {% endif %}
-    </li>
-    {% else %}
-        <li class="no-data">{{ noPostsMessage }}</li>
-    {% endfor %}
-</ul>
+{% partial '@posts' %}
