@@ -33,6 +33,16 @@ class Plugin extends PluginBase
     }
 
     /**
+     * @return array
+     */
+    public function registerComponents()
+    {
+        return [
+            'PKleindienst\BlogSeries\Components\BlogSeries' => 'blogSeries'
+        ];
+    }
+
+    /**
      * Inject into Blog Posts
      */
     public function boot()
