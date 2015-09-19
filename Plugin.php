@@ -88,7 +88,7 @@ class Plugin extends PluginBase
                     'type'      => 'relation',
                     'nameFrom'  => 'title',
                     'span'      => 'right',
-                    'emptyOption' => 'Empty'
+                    'emptyOption' => '-- None --'
                 ]
             ]);
         });
