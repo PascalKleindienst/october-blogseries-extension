@@ -38,7 +38,9 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'PKleindienst\BlogSeries\Components\BlogSeries' => 'blogSeries'
+            'PKleindienst\BlogSeries\Components\BlogSeries'     => 'blogSeries',
+            'PKleindienst\BlogSeries\Components\BlogSeriesList' => 'blogSeriesList',
+            'PKleindienst\BlogSeries\Components\PostNavigation' => 'postNavigation',
         ];
     }
 
@@ -68,7 +70,7 @@ class Plugin extends PluginBase
         });
 
         // Extend the controller
-        PostsController::extendFormFields(function($form, $model, $context) {
+        PostsController::extendFormFields(function ($form, $model) {
             if (!$model instanceof PostModel) {
                 return;
             }
