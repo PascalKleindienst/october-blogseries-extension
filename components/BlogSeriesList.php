@@ -23,8 +23,8 @@ class BlogSeriesList extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'BlogSeriesList Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'Blog Series List',
+            'description' => 'Displays a list of blog series on the page.'
         ];
     }
 
@@ -42,10 +42,9 @@ class BlogSeriesList extends ComponentBase
             ],
             'seriesPage' => [
                 'title'       => 'Series Page',
-                'description' => 'Name of the seroes page file for the series links. This property is used by the default component partial.',
+                'description' => 'The page where the single series are displayed.',
                 'type'        => 'dropdown',
-                'default'     => 'blog/series',
-                'group'       => 'Links',
+                'default'     => 'blog/series'
             ]
         ];
     }

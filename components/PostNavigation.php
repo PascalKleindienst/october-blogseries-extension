@@ -40,8 +40,8 @@ class PostNavigation extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'PostNavigation Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'Post Navigation',
+            'description' => 'Displays a navigation for the current posts series.'
         ];
     }
 
@@ -59,7 +59,7 @@ class PostNavigation extends ComponentBase
             ],
             'smallNav' => [
                 'title'       => 'Small Navigation',
-                'description' => '',
+                'description' => 'Display a small "Previous/Next Navigation" instead of a full post list',
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
@@ -72,7 +72,7 @@ class PostNavigation extends ComponentBase
             ],
             'seriesPage' => [
                 'title'       => 'Series Page',
-                'description' => '',
+                'description' => 'The page where the single series are displayed.',
                 'type'        => 'dropdown',
                 'default'     => 'blog/series',
                 'group'       => 'Links',
