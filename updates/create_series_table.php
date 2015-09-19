@@ -39,7 +39,7 @@ class CreateSeriesTable extends Migration
     {
         if (PluginManager::instance()->hasPlugin('RainLab.Blog')) {
             Schema::table('rainlab_blog_posts', function ($table) {
-                $table->dropIndex('series_id');
+                $table->dropForeign(['series_id']);
                 $table->dropColumn('series_id');
             });
             Schema::dropIfExists('pkleindienst_blogseries_series');
