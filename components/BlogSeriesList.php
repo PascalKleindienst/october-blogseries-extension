@@ -18,6 +18,12 @@ class BlogSeriesList extends ComponentBase
     public $seriesPage;
 
     /**
+     * If the series list should be ordered by another attribute.
+     * @var string
+     */
+    public $sortOrder;
+
+    /**
      * @return array
      */
     public function componentDetails()
@@ -45,7 +51,13 @@ class BlogSeriesList extends ComponentBase
                 'description' => 'The page where the single series are displayed.',
                 'type'        => 'dropdown',
                 'default'     => 'blog/series'
-            ]
+            ],
+            'sortOrder' => [
+                'title'       => 'Order',
+                'description' => 'Attribute on which the items should be ordered',
+                'type'        => 'dropdown',
+                'default'     => 'title asc'
+            ],
         ];
     }
 
@@ -58,13 +70,23 @@ class BlogSeriesList extends ComponentBase
     }
 
     /**
+     * @see RainLab\Blog\Models\Post::$allowedSortingOptions
+     * @return mixed
+     */
+    public function getSortOrderOptions()
+    {
+        return Series::$sortingOptions;
+    }
+
+    /**
      * @return mixed
      */
     public function onRun()
     {
         // load series
-        $this->seriesPage = $this->page[ 'seriesPage' ] = $this->property('seriesPage');
-        $this->series = $this->page[ 'series' ] = $this->listSeries();
+        $this->seriesPage = $this->page['seriesPage'] = $this->property('seriesPage');
+        $this->sortOrder = $this->page['sortOrder'] = $this->property('sortOrder');
+        $this->series = $this->page['series'] = $this->listSeries();
     }
 
     /**
@@ -74,7 +96,9 @@ class BlogSeriesList extends ComponentBase
     protected function listSeries()
     {
         // get series
-        $series = Series::with('posts')->orderBy('title')->get();
+        $series = Series::listFrontend([
+            'sort' => $this->property('sortOrder')
+        ]);
 
         // Add a "url" helper attribute for linking to each post and category
         if ($series && !$series->isEmpty()) {
