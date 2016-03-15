@@ -1,3 +1,6 @@
 1.0.1:
   - First version of BlogSeries
   - create_series_table.php
+1.1.0:
+  - added sorting options to blogSeries and blogSeriesList components
+  - added posts relation manager to series controller
