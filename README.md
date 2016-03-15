@@ -8,6 +8,7 @@ The `blogSeries` component outputs the series and lists all posts which belong t
 #### Attributes
 - **Slug** - Look up the series using the supplied slug value.
 - **No Posts Message** - Message to show if no posts where found.
+- **Sort Order** - the column name and direction used for the sort order of the posts. The default value is **published_at desc**.
 - **Category Page** - The page where the blog posts are filtered by a category.
 - **Post Page** - The page where single blog posts are displayed.
 
@@ -19,6 +20,7 @@ url = "/blog/series/:slug"
 [blogSeries]
 slug = "{{ :slug }}"
 noPostsMessage = "No posts found"
+sortOrder = "created_at asc"
 categoryPage = "blog"
 postPage = "blog/posts"
 ==
@@ -32,6 +34,7 @@ The `blogSeriesList` component displays a list of blog series on the page
 
 #### Attributes
 - **Display empty series** - Show series that do not have any posts.
+- **Sort Order** - the column name and direction used for the sort order of the series. The default value is **title asc**
 - **Series Page** - The page where the series is displayed *(the page with the `blogSeries` component)*.
 
 #### Example Usage
@@ -41,6 +44,7 @@ url = "/blog/:page?"
 
 [blogSeriesList]
 seriesPage = "blog/series"
+sortOrder = "updated_at asc"
 ==
 ...
 <div class="sidebar">
