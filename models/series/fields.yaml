@@ -21,3 +21,8 @@ fields:
         label: Description
         type: richeditor
         size: huge
+
+    posts:
+        label: Posts
+        type: partial
+        path: field_posts

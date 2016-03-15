@@ -1,0 +1,12 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+posts:
+    label: Posts
+    view:
+        list: $/rainlab/blog/models/post/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        form: $/rainlab/blog/models/post/fields.yaml
+        recordsPerPage: 10
