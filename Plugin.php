@@ -28,7 +28,8 @@ class Plugin extends PluginBase
             'name'        => 'BlogSeries',
             'description' => 'Add posts to series',
             'author'      => 'PKleindienst',
-            'icon'        => 'icon-list-alt'
+            'icon'        => 'icon-list-alt',
+            'homepage'    => 'https://github.com/PascalKleindienst/october-blogseries-extension'
         ];
     }
 
@@ -40,7 +41,7 @@ class Plugin extends PluginBase
         return [
             'PKleindienst\BlogSeries\Components\BlogSeries'     => 'blogSeries',
             'PKleindienst\BlogSeries\Components\BlogSeriesList' => 'blogSeriesList',
-            'PKleindienst\BlogSeries\Components\PostNavigation' => 'postNavigation',
+            'PKleindienst\BlogSeries\Components\PostNavigation' => 'postNavigation'
         ];
     }
 
@@ -61,11 +62,11 @@ class Plugin extends PluginBase
             $manager->addSideMenuItems('RainLab.Blog', 'blog', [
                 'series' => [
                     'label' => 'Series',
-                    'icon' => 'icon-list-alt',
-                    'code' => 'series',
+                    'icon'  => 'icon-list-alt',
+                    'code'  => 'series',
                     'owner' => 'RainLab.Blog',
-                    'url' => Backend::url('pkleindienst/blogseries/series')
-                ],
+                    'url  ' => Backend::url('pkleindienst/blogseries/series')
+                ]
             ]);
         });
 
@@ -74,20 +75,21 @@ class Plugin extends PluginBase
             if (!$model instanceof PostModel) {
                 return;
             }
+
             $form->addSecondaryTabFields([
                 'categories' => [
-                    'tab'       => 'rainlab.blog::lang.post.tab_categories',
-                    'type'      => 'relation',
+                    'tab'          => 'rainlab.blog::lang.post.tab_categories',
+                    'type'         => 'relation',
                     'commentAbove' => 'rainlab.blog::lang.post.categories_comment',
-                    'placeholder' => 'rainlab.blog::lang.post.categories_placeholder',
-                    'span' => 'left'
+                    'placeholder'  => 'rainlab.blog::lang.post.categories_placeholder',
+                    'span'         => 'left'
                 ],
                 'series' => [
-                    'label'     => 'Series',
-                    'tab'       => 'rainlab.blog::lang.post.tab_categories',
-                    'type'      => 'relation',
-                    'nameFrom'  => 'title',
-                    'span'      => 'right',
+                    'label'       => 'Series',
+                    'tab'         => 'rainlab.blog::lang.post.tab_categories',
+                    'type'        => 'relation',
+                    'nameFrom'    => 'title',
+                    'span'        => 'right',
                     'emptyOption' => '-- None --'
                 ]
             ]);
