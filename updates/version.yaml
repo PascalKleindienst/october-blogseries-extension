@@ -4,4 +4,5 @@
 1.1.0:
   - added sorting options to blogSeries and blogSeriesList components
   - added posts relation manager to series controller
-1.1.1: added missing post_toolbar partial
+1.1.1: Added missing post_toolbar partial
+1.1.2: BlogSeries component now returns only published posts
