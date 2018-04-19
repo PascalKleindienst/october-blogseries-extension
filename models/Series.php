@@ -47,7 +47,7 @@ class Series extends Model
      */
     public function getPostCountAttribute()
     {
-        return $this->posts()->count();
+        return $this->posts()->isPublished()->count();
     }
 
     /**
