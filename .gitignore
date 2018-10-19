@@ -75,4 +75,5 @@ $RECYCLE.BIN/
 .env.php
 .env
 
-
+## vs code
+.vscode
