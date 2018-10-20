@@ -41,7 +41,8 @@ class Plugin extends PluginBase
         return [
             'PKleindienst\BlogSeries\Components\BlogSeries'     => 'blogSeries',
             'PKleindienst\BlogSeries\Components\BlogSeriesList' => 'blogSeriesList',
-            'PKleindienst\BlogSeries\Components\PostNavigation' => 'postNavigation'
+            'PKleindienst\BlogSeries\Components\PostNavigation' => 'postNavigation',
+            'PKleindienst\BlogSeries\Components\RelatedSeries'  => 'relatedSeries'
         ];
     }
 
@@ -61,11 +62,12 @@ class Plugin extends PluginBase
         Event::listen('backend.menu.extendItems', function ($manager) {
             $manager->addSideMenuItems('RainLab.Blog', 'blog', [
                 'series' => [
-                    'label' => 'Series',
-                    'icon'  => 'icon-list-alt',
-                    'code'  => 'series',
-                    'owner' => 'RainLab.Blog',
-                    'url  ' => Backend::url('pkleindienst/blogseries/series')
+                    'label'       => 'Series',
+                    'icon'        => 'icon-list-alt',
+                    'code'        => 'series',
+                    'owner'       => 'RainLab.Blog',
+                    'permissions' => ['rainlab.blog.access_posts'],
+                    'url'         => Backend::url('pkleindienst/blogseries/series')
                 ]
             ]);
         });
