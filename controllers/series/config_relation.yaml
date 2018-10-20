@@ -10,3 +10,13 @@ posts:
     manage:
         form: $/rainlab/blog/models/post/fields.yaml
         recordsPerPage: 10
+
+related:
+    label: Related Series
+    view:
+        list: $/pkleindienst/blogseries/models/related/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        list: $/pkleindienst/blogseries/models/related/columns.yaml
+        recordsPerPage: 10
+        scope: noSelfRelation
