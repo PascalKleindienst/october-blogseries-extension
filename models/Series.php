@@ -29,6 +29,18 @@ class Series extends Model
     ];
 
     /**
+     * @var array Relations
+     */
+    public $belongsToMany = [
+        'related' => [
+            'PKleindienst\BlogSeries\Models\Series',
+            'table'    => 'pkleindienst_blogseries_related',
+            'otherKey' => 'related_id',
+            'order'    => 'title asc'
+        ],
+    ];
+
+    /**
      * The attributes on which the post list can be ordered
      * @var array
      */
@@ -66,6 +78,18 @@ class Series extends Model
     }
 
     /**
+     * Cannot use itself as a related series.
+     *
+     * @param Query $query
+     * @param Series $current
+     * @return Query
+     */
+    public function scopeNoSelfRelation($query, $current)
+    {
+        return $query->where('id', '!=', $current->id);
+    }
+
+    /**
      * @param $query
      * @param $options
      * @return mixed
@@ -73,7 +97,8 @@ class Series extends Model
     public function scopeListFrontend($query, $options)
     {
         // Default options
-        array_merge(['sort' => 'created_at'], $options);
+        $options = array_merge(['sort' => 'created_at'], $options);
+        $relations = ['posts', 'related'];
 
         // Sorting
         // @see \RainLab\Blog\Models\Post::scopeListFrontEnd()
@@ -96,6 +121,11 @@ class Series extends Model
             }
         }
 
-        return $query->with('posts')->get();
+        // Get by slug
+        if (array_key_exists('slug', $options)) {
+            $query->where('slug', $options['slug']);
+        }
+
+        return $query->with($relations)->get();
     }
 }

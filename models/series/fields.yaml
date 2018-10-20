@@ -22,6 +22,11 @@ fields:
         type: richeditor
         size: huge
 
+    related:
+        label: Related Series
+        type: partial
+        path: field_related
+
     posts:
         label: Posts
         type: partial
