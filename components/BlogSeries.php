@@ -25,6 +25,12 @@ class BlogSeries extends ComponentBase
     public $noPostsMessage;
 
     /**
+     * Flag to indicate if related series should be displayed.
+     * @var bool
+     */
+    public $showRelated;
+
+    /**
      * Reference to the page name for linking to posts.
      * @var string
      */
@@ -70,6 +76,12 @@ class BlogSeries extends ComponentBase
                 'description'  => 'rainlab.blog::lang.settings.posts_no_posts_description',
                 'type'         => 'string',
                 'default'      => 'No posts found',
+                'showExternalParam' => false
+            ],
+            'showRelated'    => [
+                'title'             => 'Display Related Series',
+                'description'       => 'Whether or not related series should be displayed.',
+                'type'              => 'checkbox',
                 'showExternalParam' => false
             ],
             'sortOrder' => [
@@ -146,6 +158,7 @@ class BlogSeries extends ComponentBase
     {
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
         $this->sortOrder = $this->page['sortOrder'] = $this->property('sortOrder');
+        $this->showRelated = $this->page['showRelated'] = $this->property('showRelated');
 
         // Page links
         $this->postPage = $this->page['postPage' ] = $this->property('postPage');
