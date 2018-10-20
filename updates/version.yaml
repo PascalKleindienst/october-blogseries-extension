@@ -5,5 +5,7 @@
   - added sorting options to blogSeries and blogSeriesList components
   - added posts relation manager to series controller
 1.1.1: added missing post_toolbar partial
-1.2.0:
+1.2.0: added related series
+1.2.1:
+  - added bug fix considering related series
   - create_related_table.php
