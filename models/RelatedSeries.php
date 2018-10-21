@@ -31,6 +31,6 @@ class RelatedSeries extends Model
      */
     public function setUrl($pageName, $controller)
     {
-        return $this->url = $controller->pageUrl($pageName);
+        return $this->url = $controller->pageUrl($pageName, ['slug' => $this->slug]);
     }
 }

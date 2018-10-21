@@ -9,3 +9,4 @@
 1.2.1:
   - added bug fix considering related series
   - create_related_table.php
+1.2.2: Fixed broken related series urls in blogSeries component

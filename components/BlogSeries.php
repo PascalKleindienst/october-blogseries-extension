@@ -31,6 +31,12 @@ class BlogSeries extends ComponentBase
     public $showRelated;
 
     /**
+     * Reference to the page name for linking to related series.
+     * @var string
+     */
+    public $seriesPage;
+
+    /**
      * Reference to the page name for linking to posts.
      * @var string
      */
@@ -90,6 +96,13 @@ class BlogSeries extends ComponentBase
                 'type'        => 'dropdown',
                 'default'     => 'published_at asc'
             ],
+            'seriesPage' => [
+                'title'       => 'Series Page',
+                'description' => 'The page where the single series are displayed.',
+                'type'        => 'dropdown',
+                'default'     => 'blog/series',
+                'group'       => 'Links',
+            ],
             'categoryPage' => [
                 'title'       => 'rainlab.blog::lang.settings.posts_category',
                 'description' => 'rainlab.blog::lang.settings.posts_category_description',
@@ -121,6 +134,15 @@ class BlogSeries extends ComponentBase
      * @return mixed
      */
     public function getPostPageOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
+
+    /**
+     * @see \RainLab\Blog\Components\Posts::getPostPageOptions()
+     * @return mixed
+     */
+    public function getSeriesPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
@@ -162,6 +184,7 @@ class BlogSeries extends ComponentBase
 
         // Page links
         $this->postPage = $this->page['postPage' ] = $this->property('postPage');
+        $this->seriesPage = $this->page['seriesPage' ] = $this->property('seriesPage');
         $this->categoryPage = $this->page['categoryPage'] = $this->property('categoryPage');
     }
 
@@ -175,28 +198,7 @@ class BlogSeries extends ComponentBase
         $slug = $this->property('slug');
         $series = Series::with([
             'posts' => function ($query) {
-                $sort = $this->property('sortOrder');
-                /*
-                 * Sorting
-                 * @see \RainLab\Blog\Models\Post::scopeListFrontEnd()
-                 */
-                if (!is_array($sort)) {
-                    $sort = [$sort];
-                }
-
-                foreach ($sort as $sorting) {
-                    if (in_array($sorting, array_keys(BlogPost::$allowedSortingOptions))) {
-                        $parts = explode(' ', $sorting);
-                        if (count($parts) < 2) {
-                            array_push($parts, 'desc');
-                        }
-                        list($sortField, $sortDirection) = $parts;
-                        if ($sortField == 'random') {
-                            $sortField = DB::raw('RAND()');
-                        }
-                        $query->orderBy($sortField, $sortDirection);
-                    }
-                }
+                $this->sortingQuery($query);
             },
             'posts.categories'
         ])
@@ -206,6 +208,13 @@ class BlogSeries extends ComponentBase
         // Add a "url" helper attribute for linking to each post and category
         if ($series && $series->posts->count()) {
             $series->posts->each([$this, 'setUrls']);
+        }
+
+        // Add a "url" helper attribute for linking to each related series
+        if ($series && $series->related->count()) {
+            $series->related->each(function ($related) {
+                $related->setUrl($this->seriesPage, $this->controller);
+            });
         }
 
         return $series;
@@ -223,6 +232,33 @@ class BlogSeries extends ComponentBase
             $post->categories->each(function ($category) {
                 $category->setUrl($this->categoryPage, $this->controller);
             });
+        }
+    }
+
+    /**
+     * Sorting
+     * @see \RainLab\Blog\Models\Post::scopeListFrontEnd()
+     */
+    protected function sortingQuery($query)
+    {
+        $sort = $this->property('sortOrder');
+
+        if (!is_array($sort)) {
+            $sort = [$sort];
+        }
+
+        foreach ($sort as $sorting) {
+            if (in_array($sorting, array_keys(BlogPost::$allowedSortingOptions))) {
+                $parts = explode(' ', $sorting);
+                if (count($parts) < 2) {
+                    array_push($parts, 'desc');
+                }
+                list($sortField, $sortDirection) = $parts;
+                if ($sortField == 'random') {
+                    $sortField = DB::raw('RAND()');
+                }
+                $query->orderBy($sortField, $sortDirection);
+            }
         }
     }
 }
