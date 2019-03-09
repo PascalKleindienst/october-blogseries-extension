@@ -115,7 +115,10 @@ class PostNavigation extends ComponentBase
      */
     protected function listSeries()
     {
-        $series = BlogPost::with('series.posts')->isPublished()->where('slug', $this->slug)->first();
+        $series = BlogPost::where('slug', $this->slug)->with(['series.posts' => function ($query) {
+            $query->isPublished();
+        }])->isPublished()->first();
+
 
         // Add a "url" helper attribute for linking to each post and series
         if ($series && !is_null($series->series)) {

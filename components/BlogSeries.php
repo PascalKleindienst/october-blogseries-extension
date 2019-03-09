@@ -257,7 +257,7 @@ class BlogSeries extends ComponentBase
                 if ($sortField == 'random') {
                     $sortField = DB::raw('RAND()');
                 }
-                $query->orderBy($sortField, $sortDirection);
+                $query->isPublished()->orderBy($sortField, $sortDirection);
             }
         }
     }
