@@ -1,0 +1,10 @@
+{% set related_series = __SELF__.relatedSeries %}
+
+<div class="related_series list-group">
+{% for item in related_series %}
+    <a href="{{ item.url }}" class="list-group-item list-group-item-action">
+        <h4 class="related_series_title">{{ item.title }}</h4>
+        <div class="related_series_desc">{{ item.description|raw }}</div>
+    </a>
+{% endfor %}
+</div>

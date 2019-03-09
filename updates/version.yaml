@@ -4,5 +4,10 @@
 1.1.0:
   - added sorting options to blogSeries and blogSeriesList components
   - added posts relation manager to series controller
-1.1.1: Added missing post_toolbar partial
+1.1.1: added missing post_toolbar partial
 1.1.2: BlogSeries and PostNavigation components now return only published posts
+1.2.0: added related series
+1.2.1:
+  - added bug fix considering related series
+  - create_related_table.php
+1.2.2: Fixed broken related series urls in blogSeries component
